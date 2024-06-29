@@ -94,13 +94,13 @@ def select_crossover(solution: list[list[int]]) -> list[list[int]]:    # 选择�
         for i in new_sec0:
             for j in range(len(p1)):
                 if p1[j] == i:
-                    p1[j] = new_sec1[new_sec0.index(i)]    # 交换信息后需要进行去重以保证城市唯一性
+                    p1[j] = new_sec1[new_sec0.index(i)]    # 去重以保证城市唯一性
         son1 = p1[:rand] + sec0 + p1[rand+5:]   # 子体son1
 
         for i in new_sec1:
             for j in range(len(p0)):
                 if p0[j] == i:
-                    p0[j] = new_sec0[new_sec1.index(i)]
+                    p0[j] = new_sec0[new_sec1.index(i)]    # 去重以保证城市唯一性
         son0 = p0[:rand] + sec1 + p0[rand+5:]   # 子体son0
         # 将新产生的2个子体加入新种群
         new_group.append(son1)
@@ -157,7 +157,7 @@ for i in range(len(final_route)):
 plt.scatter(x_coords, y_coords)
 # 绘制带箭头的线段，按顺序相连并首尾相连
 for i in range(len(x_coords) - 1):
-    # 绘制普通线段（除了首尾相连的特殊线段）
+    # 绘制普通线段（除了首尾相连的）
     plt.annotate('', xy=(x_coords[i + 1], y_coords[i + 1]), xytext=(x_coords[i], y_coords[i]),
                  arrowprops=dict(facecolor='black', arrowstyle='->'))
 
@@ -165,10 +165,10 @@ for i in range(len(x_coords) - 1):
 plt.annotate('', xy=(x_coords[0], y_coords[0]), xytext=(x_coords[-1], y_coords[-1]),
              arrowprops=dict(facecolor='red', arrowstyle='-|>', connectionstyle='arc3,rad=0.3'))
 
-# 突出显示起点（例如，用一个更大的点或不同的颜色）
+# 突出显示起点
 plt.scatter([x_coords[0]], [y_coords[0]], color='red', s=100)  # s参数控制点的大小
 
-# 设置图形窗口大小等属性（可选）
+# 设置图形窗口大小
 plt.gcf().set_size_inches(7.5, 4.5)
 
 # 显示图形
